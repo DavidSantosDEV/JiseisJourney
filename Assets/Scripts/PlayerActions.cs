@@ -44,15 +44,6 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""StopFloat"",
-                    ""type"": ""Button"",
-                    ""id"": ""a8bf9237-7d78-4b59-838c-328f126f1848"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -60,28 +51,6 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""46e98ec1-a3ed-4321-a249-5739282f8afe"",
                     ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""4901673a-c145-4f0f-b261-62521f9c0294"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1364f6ce-201c-4d50-8d7a-f6e295c69436"",
-                    ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -101,28 +70,6 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""ef89a03c-ff6a-438c-b4ff-8dd798f37bec"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""StopFloat"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8b734c84-8a9a-4c67-a5e9-69c68841c1a5"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""StopFloat"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""2D Vector"",
                     ""id"": ""3e687dbd-8c12-41d7-a1f8-bdf35dd16bc1"",
                     ""path"": ""2DVector"",
@@ -137,6 +84,28 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""name"": ""left"",
                     ""id"": ""3644eda2-8874-413b-aa6c-5b22904112b9"",
                     ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""06409a40-de4e-4564-9fc7-b59f7009b0b0"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""29ed4057-939e-4ac4-ad61-b1f36ef1a26d"",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -169,7 +138,18 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""down"",
                     ""id"": ""d247152f-94c3-46f7-9cb6-2af30694227c"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""3af0d1eb-e7ce-4492-8898-d127a5619e5f"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -208,7 +188,6 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Movement = m_Gameplay.FindAction("Movement", throwIfNotFound: true);
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
-        m_Gameplay_StopFloat = m_Gameplay.FindAction("StopFloat", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -270,14 +249,12 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     private IGameplayActions m_GameplayActionsCallbackInterface;
     private readonly InputAction m_Gameplay_Movement;
     private readonly InputAction m_Gameplay_Jump;
-    private readonly InputAction m_Gameplay_StopFloat;
     public struct GameplayActions
     {
         private @PlayerActions m_Wrapper;
         public GameplayActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Gameplay_Movement;
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
-        public InputAction @StopFloat => m_Wrapper.m_Gameplay_StopFloat;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -293,9 +270,6 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnJump;
-                @StopFloat.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnStopFloat;
-                @StopFloat.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnStopFloat;
-                @StopFloat.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnStopFloat;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -306,9 +280,6 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
-                @StopFloat.started += instance.OnStopFloat;
-                @StopFloat.performed += instance.OnStopFloat;
-                @StopFloat.canceled += instance.OnStopFloat;
             }
         }
     }
@@ -317,6 +288,5 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnStopFloat(InputAction.CallbackContext context);
     }
 }
