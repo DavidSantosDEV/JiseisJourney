@@ -13,7 +13,7 @@ TagManager:
   - Water
   - UI
   - Player
-  - 
+  - WalkableTiles
   - 
   - 
   - 
@@ -41,4 +41,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1937202597
+    locked: 0
+  - name: WalkableTilemap
+    uniqueID: 464187291
+    locked: 0
+  - name: Player
+    uniqueID: 1256795069
+    locked: 0
+  - name: Foreground
+    uniqueID: 2178778665
     locked: 0
