@@ -10,6 +10,7 @@ enum PlayerStates
     Jumping,
     Falling,
     Floating,
+	Ladder,
 	Stuck,
 }
 
@@ -33,6 +34,9 @@ public class PlayerController : MonoBehaviour
 	private float AirSpeed = 0.9f;
 
 	[SerializeField]
+	private float ladderSpeed = 1;
+
+	[SerializeField]
 	private float JumpForce = 100f;
 
 	[SerializeField]
@@ -53,7 +57,10 @@ public class PlayerController : MonoBehaviour
 	[SerializeField]
 	private float coyoteeTime= .2f;
 
-	bool bCanCoyotee = false;
+    [SerializeField]
+    string LadderTag = "Ladder";
+
+    bool bCanCoyotee = false;
 
     private float jumpTime;
 
@@ -132,6 +139,11 @@ public class PlayerController : MonoBehaviour
 		}
 		switch (PlayerState)
 		{
+			case PlayerStates.Ladder:
+				vector = new Vector2(vector.x * GroundedSpeed, vector.y*ladderSpeed);
+				myBody.velocity = vector;
+
+				break;
 			case PlayerStates.Floating:
 				if (bHasJumpSetDirection)
 				{
@@ -182,6 +194,10 @@ public class PlayerController : MonoBehaviour
 				case PlayerStates.Grounded:
 					myBody.gravityScale = defaultGravity;
 					bHasJumpSetDirection = false;
+					break;
+				case PlayerStates.Ladder:
+					myBody.gravityScale = 0;
+
 					break;
 				default:
 					stateHashName = IdleAnim;
@@ -245,6 +261,7 @@ public class PlayerController : MonoBehaviour
 	private void CheckGrounding()
 	{
 		bool flag = false;
+		if (PlayerState == PlayerStates.Ladder) return;
 		foreach (Transform feet in feetList)
 		{
 			RaycastHit2D raycastHit2D = Physics2D.Raycast(feet.transform.position, Vector2.down, CastSize, GroundLayer);
@@ -281,6 +298,26 @@ public class PlayerController : MonoBehaviour
 	public bool GetIsGrounded()
 	{
 		return PlayerState.Equals(PlayerStates.Grounded);
+	}
+
+	public Rigidbody2D GetRigidBody() { return myBody; }
+
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.CompareTag(LadderTag))
+		{
+			ChangeState(PlayerStates.Ladder);
+		}
+	}
+
+	private void OnTriggerExit2D(Collider2D collision)
+	{
+		if (collision.CompareTag(LadderTag))
+		{
+			ChangeState(PlayerStates.Grounded);
+		}
 	}
 
 }
