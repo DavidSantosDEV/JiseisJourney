@@ -4,15 +4,34 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static GameManager Instance { get; private set; }
+
+
+
+    int CollectedCoins = 0;
+    int CollectedBerries = 0;
+
+
+    private void Awake()
     {
-        
+        if (Instance)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AddCollectedCoins(int Num)
     {
-        
+        CollectedCoins += Num;
+    }
+
+    public void AddCollectedBerries(int Num)
+    {
+        CollectedBerries += Num;
     }
 }

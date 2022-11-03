@@ -2680,7 +2680,7 @@ TilemapCollider2D:
   m_GameObject: {fileID: 157348687}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 4e48bd3802b63ed4fa90889d5f607485, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -2767,10 +2767,10 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.23521322
-    y: 0.2735294
-    width: 0.5281981
-    height: 0.4517647
+    x: 0.24520184
+    y: 0.2968254
+    width: 0.50827265
+    height: 0.4063492
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
@@ -4443,7 +4443,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3144073527199421971, guid: 103f271052bbf4e4b83e750252f63459, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3144073527199421971, guid: 103f271052bbf4e4b83e750252f63459, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4499,16 +4499,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -2165196964728349913, guid: 1a3738441451efa4b9e58642da3b54c5, type: 3}
-      propertyPath: ladderSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1049418082727755941, guid: 1a3738441451efa4b9e58642da3b54c5, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -1256638480, guid: 793a7b94c79557b4691954553e4c891b, type: 3}
-    - target: {fileID: 1049418082727755941, guid: 1a3738441451efa4b9e58642da3b54c5, type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
+      propertyPath: CastSize
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2797436155123875220, guid: 1a3738441451efa4b9e58642da3b54c5, type: 3}
       propertyPath: m_Name

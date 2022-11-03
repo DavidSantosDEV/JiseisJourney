@@ -78,6 +78,9 @@ public class PlayerController : MonoBehaviour
 	[SerializeField]
 	private List<Transform> feetList = new List<Transform>();
 
+	[Header("Particles")]
+	public ParticleSystem walkDust;
+
 	private static readonly int RunAnim = Animator.StringToHash("Running");
 
 	private static readonly int IdleAnim = Animator.StringToHash("Idle");
@@ -268,12 +271,13 @@ public class PlayerController : MonoBehaviour
 			Debug.DrawRay(feet.transform.position, Vector2.down * CastSize, Color.blue);
 			if ((bool)raycastHit2D)
 			{
+				if (PlayerState == PlayerStates.Grounded) return;
 				if (PlayerState == PlayerStates.Floating || myBody.velocity.y <= 0f || PlayerState == PlayerStates.Falling)
 				{
 					flag = true;
 					myBody.gravityScale = defaultGravity;
 					ChangeState(PlayerStates.Grounded);
-					break;
+					return;
 				}
 			}
 			else
@@ -281,7 +285,7 @@ public class PlayerController : MonoBehaviour
 				flag = false;
 			}
 		}
-		if (!flag && !PlayerState.Equals(PlayerStates.Jumping) && !PlayerState.Equals(PlayerStates.Floating))
+		if (flag==false && !PlayerState.Equals(PlayerStates.Jumping) && !PlayerState.Equals(PlayerStates.Floating))
 		{
 			ChangeState(PlayerStates.Falling);
 		}
@@ -319,5 +323,18 @@ public class PlayerController : MonoBehaviour
 			ChangeState(PlayerStates.Grounded);
 		}
 	}
+
+	public void PlayDust()
+	{
+		walkDust?.Play();
+		//StartCoroutine(PlayParticleForTime(walkDust, 0.2f));
+	}
+
+	/*private IEnumerator PlayParticleForTime(ParticleSystem Particle, float time)
+	{
+		Particle?.Play();
+		yield return new WaitForSeconds(time);
+		Particle?.Stop();
+	}*/
 
 }
