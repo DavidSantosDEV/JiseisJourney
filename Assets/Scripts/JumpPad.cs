@@ -7,6 +7,13 @@ public class JumpPad : MonoBehaviour
 
     [SerializeField]
     Vector2 ImpulseForce;
+
+    Animator _anim;
+    private void Start()
+    {
+        _anim = GetComponent<Animator>();
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         
@@ -18,6 +25,10 @@ public class JumpPad : MonoBehaviour
                 if (!player.GetIsGrounded())
                 {
                     player.GetRigidBody()?.AddForce(ImpulseForce);
+                    if (_anim)
+                    {
+                        _anim.SetTrigger("Jump");
+                    }
                 }
             }
             //collision.gameObject.GetComponent<Rigidbody2D>()?.AddForce(ImpulseForce);
