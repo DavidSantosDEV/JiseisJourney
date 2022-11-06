@@ -17,7 +17,7 @@ public class Paralax : MonoBehaviour
         lenght = GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
-    void LateUpdate()
+    void Update()
     {
         float temp = Camera.transform.position.x * (1 - paralaxStrenght);
         float dist = Camera.transform.position.x * paralaxStrenght;
