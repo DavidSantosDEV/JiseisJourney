@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine;
 
 
-enum PlayerStates
+public enum PlayerStates
 {
     Grounded,
     Jumping,
@@ -79,9 +79,10 @@ public class PlayerController : MonoBehaviour
 	private List<Transform> feetList = new List<Transform>();
 
 	[Header("Particles")]
-	public ParticleSystem walkDust;
+	public ParticleLibrary groundParticleData;
+    public Transform particleSpawnPos;
 
-	private static readonly int RunAnim = Animator.StringToHash("Running");
+    private static readonly int RunAnim = Animator.StringToHash("Running");
 
 	private static readonly int IdleAnim = Animator.StringToHash("Idle");
 
@@ -175,7 +176,7 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	private void ChangeState(PlayerStates newState)
+	public void ChangeState(PlayerStates newState)
 	{
 		if (newState != PlayerState)
 		{
@@ -293,9 +294,11 @@ public class PlayerController : MonoBehaviour
 
 	private void CheckFlip()
 	{
-		if (Mathf.Abs(myBody.velocity.x) > 0f)
-		{
-			gameObject.transform.localScale= myBody.velocity.x < 0f ? Vector3.one : new Vector3(-1,1,1); 
+		Vector2 ve = PlayerInputControls.Gameplay.Movement.ReadValue<Vector2>();
+
+        if (Mathf.Abs(ve.x) > 0f) //myBody.velocity
+        {
+			gameObject.transform.localScale= ve.x < 0f ? Vector3.one : new Vector3(-1,1,1); 
 		}
 	}
 
@@ -326,7 +329,21 @@ public class PlayerController : MonoBehaviour
 
 	public void PlayDust()
 	{
-		walkDust?.Play();
+        RaycastHit2D raycastHit2D = Physics2D.Raycast(feetList[0].transform.position, Vector2.down, CastSize);
+		if (raycastHit2D)
+		{
+            LayerMask l = raycastHit2D.collider.gameObject.layer;
+            GameObject obj = groundParticleData.GetPrefabForLayer(l);
+			if (obj)
+			{
+				Transform t = Transform();
+				t.position = particleSpawnPos.position;
+				t.localScale= particleSpawnPos.localScale;
+                Instantiate(obj, t);
+				
+            }
+			
+        }
 		//StartCoroutine(PlayParticleForTime(walkDust, 0.2f));
 	}
 

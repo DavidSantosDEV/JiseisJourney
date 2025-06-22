@@ -15,6 +15,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public Transform traceGroundPlace;
     public Transform traceFrontPlace;
+    public Transform traceUnder;
 
     public LayerMask TraceLayers;
 
@@ -28,19 +29,22 @@ public class EnemyBehaviour : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (HasTrace(traceGroundPlace,Vector2.down,traceSizeGround))
+        if (HasTrace(traceUnder, Vector2.down, traceSizeGround))
         {
-            if (HasTrace(traceFrontPlace, (bIsFlipped ? Vector2.left : Vector2.right), traceSizeFront))
+            if (HasTrace(traceGroundPlace, Vector2.down, traceSizeGround))
+            {
+                if (HasTrace(traceFrontPlace, (bIsFlipped ? Vector2.left : Vector2.right), traceSizeFront))
+                {
+                    FlipEnemy();
+                }
+            }
+            else
             {
                 FlipEnemy();
             }
         }
-        else
-        {
-            FlipEnemy();
-        }
-
-        rbody.velocity =(bIsFlipped? Vector2.left : Vector2.right) * enemySpeed;
+        Vector2 val = new Vector2((bIsFlipped ? -1 : 1) * enemySpeed, rbody.velocity.y);
+        rbody.velocity = val;
     }
 
     bool HasTrace(Transform Start, Vector2 direction, float lenght)

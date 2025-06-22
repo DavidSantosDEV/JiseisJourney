@@ -24,11 +24,18 @@ public class JumpPad : MonoBehaviour
             {
                 if (!player.GetIsGrounded())
                 {
-                    player.GetRigidBody()?.AddForce(ImpulseForce);
-                    if (_anim)
+                    Rigidbody2D rb = player.GetRigidBody();
+                    if (rb)
                     {
-                        _anim.SetTrigger("Jump");
+                        player.ChangeState(PlayerStates.Falling);
+                        if (_anim)
+                        {
+                            _anim.SetTrigger("Jump");
+                        }
+                        rb.AddForce(ImpulseForce);
                     }
+                    
+
                 }
             }
             //collision.gameObject.GetComponent<Rigidbody2D>()?.AddForce(ImpulseForce);

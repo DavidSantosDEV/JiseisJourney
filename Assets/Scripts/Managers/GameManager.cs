@@ -34,4 +34,14 @@ public class GameManager : MonoBehaviour
     {
         CollectedBerries += Num;
     }
+
+    Transform CurrentCheckPoint;
+    public void SetCurrentCheckPoint(Transform newPoint)
+    {
+        CurrentCheckPoint = newPoint;
+    }
+    public Transform GetCurrentCheckPoint()
+    {
+        return CurrentCheckPoint;
+    }
 }

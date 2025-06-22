@@ -74,8 +74,8 @@ GameObject:
   - component: {fileID: 2712705924142097317}
   - component: {fileID: 2712705924142097316}
   - component: {fileID: 2712705924142097319}
-  - component: {fileID: 2712705924142097318}
   - component: {fileID: 2712705924142097315}
+  - component: {fileID: 5175108804456959599}
   m_Layer: 0
   m_Name: Corn
   m_TagString: Untagged
@@ -97,6 +97,7 @@ Transform:
   m_Children:
   - {fileID: 2712705923741305101}
   - {fileID: 2712705923560838557}
+  - {fileID: 750184171738746666}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -139,7 +140,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1256795069
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 779888723, guid: 2574cdb8d3da1604b9068d23e010ed01, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -189,35 +190,10 @@ MonoBehaviour:
   traceSizeFront: 0.5
   traceGroundPlace: {fileID: 2712705923560838557}
   traceFrontPlace: {fileID: 2712705923741305101}
+  traceUnder: {fileID: 750184171738746666}
   TraceLayers:
     serializedVersion: 2
     m_Bits: 8
---- !u!61 &2712705924142097318
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2712705924142097305}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.1930654, y: -0.21384585}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 2, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.85948896, y: 1.5723083}
-  m_EdgeRadius: 0
 --- !u!50 &2712705924142097315
 Rigidbody2D:
   serializedVersion: 4
@@ -234,8 +210,55 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 4e48bd3802b63ed4fa90889d5f607485, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!70 &5175108804456959599
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2712705924142097305}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.17415428, y: -0.16793346}
+  m_Size: {x: 0.9799576, y: 1.6641331}
+  m_Direction: 0
+--- !u!1 &8435735979141896486
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 750184171738746666}
+  m_Layer: 0
+  m_Name: TraceUnder
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &750184171738746666
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8435735979141896486}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.15, y: -0.993, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2712705924142097314}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
